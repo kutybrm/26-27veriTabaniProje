@@ -19,4 +19,4 @@ Veritabanı Yönetim Sistemleri dersi dönem projesi.
 - [ ] Spring Boot Backend bağlantısı
       
 ## ER Diyagramı
-![ER Diyagramı](er_diyagrami.jpg)
+![ER Diyagramı](er_diyagrami.png)
