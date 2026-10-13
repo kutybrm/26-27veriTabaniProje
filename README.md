@@ -14,6 +14,9 @@ Veritabanı Yönetim Sistemleri dersi dönem projesi.
 ## Proje Durumu ve Dosyalar
 - [x] Veritabanı tablo tasarımları 
 - [ ] Trigger, Stored Procedure ve View yapıları 
-- [ ] ER Diyagramı
+- [x] ER Diyagramı
 - [ ] Örnek veri seti (Seed data)
 - [ ] Spring Boot Backend bağlantısı
+      
+## ER Diyagramı
+![ER Diyagramı](er_diyagrami.jpg)
