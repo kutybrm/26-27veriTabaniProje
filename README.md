@@ -1,6 +1,6 @@
 # Otel Rezervasyon ve Konaklama Yönetim Sistemi
 
-Veritabanı Yönetim Sistemleri dersi dönem projesi.
+Veritabanı Yönetimi dersi dönem projesi.
 
 ## Grup Üyeleri
 - Ahmet Kutay Bayram - 455134 
