@@ -14,13 +14,18 @@ public class OdaController {
         this.odaService = odaService;
     }
 
-    @PostMapping("/ekle")
+    @PostMapping({"", "/ekle"})
     public Oda ekle(@RequestBody Oda oda) {
-        return odaService.odaEkle(oda);
+        return odaService.ekle(oda);
     }
 
-    @GetMapping("/hepsi")
+    @GetMapping({"", "/hepsi"})
     public List<Oda> tumunuGetir() {
         return odaService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Oda findById(@PathVariable Integer id) {
+        return odaService.findById(id);
     }
 }

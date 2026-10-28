@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/odatipleri")
+@RequestMapping("/api/oda-tipleri")
 public class OdaTipiController {
     private final OdaTipiService odaTipiService;
 
@@ -16,14 +16,18 @@ public class OdaTipiController {
         this.odaTipiService = odaTipiService;
     }
 
-    @PostMapping("/ekle")
+    @PostMapping({"", "/ekle"})
     public OdaTipi ekle(@RequestBody OdaTipi odaTipi) {
-
-        return odaTipiService.odaTipiEkle(odaTipi);
+        return odaTipiService.ekle(odaTipi);
     }
 
-    @GetMapping("/hepsi")
+    @GetMapping({"", "/hepsi"})
     public List<OdaTipi> tumunuGetir() {
         return odaTipiService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public OdaTipi findById(@PathVariable Integer id) {
+        return odaTipiService.findById(id);
     }
 }

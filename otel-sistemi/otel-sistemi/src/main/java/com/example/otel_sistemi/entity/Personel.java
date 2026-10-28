@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.FetchType;
 import java.time.LocalDate;
 
 @Entity
@@ -16,9 +17,10 @@ public class Personel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "personelid")
     private Integer personelid;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "kullaniciid", nullable = false, unique = true)
     private Kullanici kullanici;
 

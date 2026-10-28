@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 
 @RestController
@@ -17,13 +18,18 @@ public class MisafirController {
         this.misafirService = misafirService;
     }
 
-    @PostMapping("/ekle")
+    @PostMapping({"", "/ekle"})
     public Misafir ekle(@RequestBody Misafir misafir) {
-        return misafirService.misafirEkle(misafir);
+        return misafirService.ekle(misafir);
     }
 
-    @GetMapping("/hepsi")
+    @GetMapping({"", "/hepsi"})
     public List<Misafir> tumunuGetir() {
         return misafirService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Misafir findById(@PathVariable Integer id) {
+        return misafirService.findById(id);
     }
 }

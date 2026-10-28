@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.FetchType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -18,9 +19,10 @@ public class SezonFiyati {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "sezonfiyatiid")
     private Integer sezonfiyatiid;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tipid", nullable = false)
     private OdaTipi odatipi;
 
@@ -30,7 +32,7 @@ public class SezonFiyati {
     @Column(name = "bitistarihi", nullable = false)
     private LocalDate bitistarihi;
 
-    @Column(name = "gecelikfiyat", nullable = false)
+    @Column(name = "gecelikfiyat", precision = 10, scale = 2, nullable = false)
     private BigDecimal gecelikfiyat;
 
     // --- Getter & Setter Metotları ---

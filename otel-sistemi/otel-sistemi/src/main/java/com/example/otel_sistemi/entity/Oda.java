@@ -7,8 +7,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.EnumType;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Column;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -18,18 +18,21 @@ public class Oda {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "odaid")
     private Integer odaid;
 
+    @Column(name = "odanumarasi", nullable = false, unique = true)
     private Integer odanumarasi;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tipid", nullable = false)
     private OdaTipi odatipi;
 
+    @Column(name = "kat", nullable = false)
     private Integer kat;
 
-    @Enumerated(EnumType.STRING)
     @JdbcTypeCode(SqlTypes.NAMED_ENUM)
+    @Column(name = "durum", columnDefinition = "odadurumu", nullable = false)
     private OdaDurumu durum;
 
     public Integer getOdaid() {

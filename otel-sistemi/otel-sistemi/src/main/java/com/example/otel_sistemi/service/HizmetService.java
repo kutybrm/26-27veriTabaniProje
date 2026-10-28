@@ -2,6 +2,7 @@ package com.example.otel_sistemi.service;
 
 import com.example.otel_sistemi.entity.Hizmet;
 import com.example.otel_sistemi.repository.HizmetRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -31,5 +32,13 @@ public class HizmetService {
 
     public List<Hizmet> findAll() {
         return hizmetRepository.findAll();
+    }
+
+    public Hizmet findById(Integer id) {
+        if (id == null || id <= 0) {
+            throw new IllegalArgumentException("Geçersiz ID değeri.");
+        }
+        return hizmetRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Hizmet bulunamadı. ID: " + id));
     }
 }

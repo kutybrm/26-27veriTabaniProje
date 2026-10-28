@@ -5,6 +5,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Column;
 import java.math.BigDecimal;
 
 @Entity
@@ -13,11 +14,19 @@ public class OdaTipi {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "tipid")
     private Integer tipid;
 
+    @Column(name = "tipadi", length = 100, nullable = false)
     private String tipadi;
+
+    @Column(name = "kapasite", nullable = false)
     private Integer kapasite;
+
+    @Column(name = "temelfiyat", precision = 10, scale = 2, nullable = false)
     private BigDecimal temelfiyat;
+
+    @Column(name = "odaaciklama", columnDefinition = "text")
     private String odaaciklama;
 
     public Integer getTipid() {

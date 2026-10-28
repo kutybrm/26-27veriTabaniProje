@@ -17,15 +17,18 @@ public class KullaniciController {
         this.kullaniciService = kullaniciService;
     }
 
-    @PostMapping("/ekle")
+    @PostMapping({"", "/ekle"})
     public Kullanici ekle(@RequestBody Kullanici kullanici) {
-
-        return kullaniciService.kullaniciEkle(kullanici);
+        return kullaniciService.ekle(kullanici);
     }
 
-    @GetMapping("/hepsi")
+    @GetMapping({"", "/hepsi"})
     public List<Kullanici> tumunuGetir() {
         return kullaniciService.findAll();
     }
-}
 
+    @GetMapping("/{id}")
+    public Kullanici findById(@PathVariable Integer id) {
+        return kullaniciService.findById(id);
+    }
+}

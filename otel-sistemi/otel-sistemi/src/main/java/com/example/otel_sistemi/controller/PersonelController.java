@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 
 @RestController
@@ -19,13 +20,18 @@ public class PersonelController {
         this.personelService = personelService;
     }
 
-    @PostMapping("/ekle")
+    @PostMapping({"", "/ekle"})
     public Personel ekle(@RequestBody Personel personel) {
-        return personelService.save(personel);
+        return personelService.ekle(personel);
     }
 
-    @GetMapping("/hepsi")
+    @GetMapping({"", "/hepsi"})
     public List<Personel> tumunuGetir() {
         return personelService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Personel findById(@PathVariable Integer id) {
+        return personelService.findById(id);
     }
 }

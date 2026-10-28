@@ -7,10 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/sezonfiyatlari")
+@RequestMapping("/api/sezon-fiyatlari")
 public class SezonFiyatiController {
 
     private final SezonFiyatiService sezonFiyatiService;
@@ -19,13 +20,18 @@ public class SezonFiyatiController {
         this.sezonFiyatiService = sezonFiyatiService;
     }
 
-    @GetMapping("/hepsi")
+    @GetMapping({"", "/hepsi"})
     public List<SezonFiyati> tumunuGetir() {
         return sezonFiyatiService.findAll();
     }
 
-    @PostMapping("/ekle")
+    @GetMapping("/{id}")
+    public SezonFiyati findById(@PathVariable Integer id) {
+        return sezonFiyatiService.findById(id);
+    }
+
+    @PostMapping({"", "/ekle"})
     public SezonFiyati ekle(@RequestBody SezonFiyati sezonFiyati) {
-        return sezonFiyatiService.save(sezonFiyati);
+        return sezonFiyatiService.ekle(sezonFiyati);
     }
 }
