@@ -114,4 +114,39 @@ public class GlobalExceptionHandler {
         );
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(hata);
     }
+
+    @ExceptionHandler(org.springframework.jdbc.UncategorizedSQLException.class)
+    public ResponseEntity<HataYaniti> handleUncategorizedSQLException(
+            org.springframework.jdbc.UncategorizedSQLException ex,
+            HttpServletRequest request) {
+
+        String mesaj = "İşlem sırasında bir veritabanı kural hatası oluştu.";
+
+        // PostgreSQL'in RAISE EXCEPTION mesajını yakala
+        if (ex.getSQLException() != null && ex.getSQLException().getMessage() != null) {
+            String rawMessage = ex.getSQLException().getMessage();
+            // "HATA: " veya "ERROR: " sonrasındaki asıl mesajı al
+            int hataIndex = rawMessage.indexOf("HATA:");
+            if (hataIndex != -1) {
+                mesaj = rawMessage.substring(hataIndex + 5).split("\n")[0].trim();
+            } else {
+                int errorIndex = rawMessage.indexOf("ERROR:");
+                if (errorIndex != -1) {
+                    mesaj = rawMessage.substring(errorIndex + 6).split("\n")[0].trim();
+                } else {
+                    mesaj = rawMessage.split("\n")[0].trim();
+                }
+            }
+        }
+
+        HataYaniti hata = new HataYaniti(
+                LocalDateTime.now(),
+                HttpStatus.BAD_REQUEST.value(),
+                "İş Kuralı İhlali",
+                mesaj,
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(hata);
+    }
 }
